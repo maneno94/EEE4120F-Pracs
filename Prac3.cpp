@@ -54,6 +54,19 @@
     that the master will be doing */
 void Master () 
 {
+
+ 
+
+
+
+
+   
+ // End of example -------------------------------------------------------------
+
+ // Write the output image
+
+
+
        //! <h3>Local vars</h3>
        // The above outputs a heading to doxygen function entry
        //int window [] = new int (9);       //2D Median filtering example using a 3 x 3 sampling window
@@ -78,9 +91,15 @@ void Master ()
        int size= (Np)*(Mp);
 
 
+
+       
+
         //int count=1;
        // Start of "Hello World" example..............................................
        printf("0: We have %d processors\n", numprocs);
+  
+ 
+       tic();      
        for(j = 1; j < numprocs; j++) 
        {
              
@@ -175,6 +194,12 @@ void Master ()
            printf("Cannot write image\n");
            return;
       }
+      
+      
+      
+      
+     printf("Time = %lg ms\n", (double)toc()/1e-3);
+      
 }
   
 

@@ -54,6 +54,19 @@
     that the master will be doing */
 void Master () 
 {
+
+ 
+
+
+
+
+   
+ // End of example -------------------------------------------------------------
+
+ // Write the output image
+
+
+
        //! <h3>Local vars</h3>
        // The above outputs a heading to doxygen function entry
        //int window [] = new int (9);       //2D Median filtering example using a 3 x 3 sampling window
@@ -78,9 +91,22 @@ void Master ()
        int size= (Np)*(Mp);
 
 
+
+       
+
         //int count=1;
        // Start of "Hello World" example..............................................
        printf("0: We have %d processors\n", numprocs);
+  
+  
+        for(int ex = 0; ex < 10; ex++)
+       {
+   //         int  j;             //! j: Loop counter
+           tic();
+
+
+  
+  
        for(j = 1; j < numprocs; j++) 
        {
              
@@ -175,6 +201,12 @@ void Master ()
            printf("Cannot write image\n");
            return;
       }
+      
+      
+      
+      
+     printf("Time = %lg ms\n", (double)toc()/1e-3);
+      }
 }
   
 
@@ -184,7 +216,7 @@ void Master ()
 void Slave(int ID)
 {
    // Start of "Hello World" example..............................................
-   std::array<int, 3> window = { 2, 8, 6};
+   std::array<int, 5> window = { 2, 8, 6,0,0};
    MPI_Status stat;
    int buff0 [3] = {};
 
@@ -218,20 +250,20 @@ void Slave(int ID)
              else
              { 
              //window[0] = buff[(y-1)*Mp + x-1];
-             //window[0] = buff[(y-1)*Mp+x]; 
+             window[0] = buff[(y-1)*Mp+x]; 
              //window[2] = buff[(y-1)*Mp+x+1]; 
              window[1] = buff[y*Mp+x-1]; 
              window[2] = buff[y*Mp+x]; 
-             window[0] = buff[y*Mp+x+1]; 
+             window[3] = buff[y*Mp+x+1]; 
              //window[6] = buff[(y+1)*Mp+x-1]; 
-             //window[4] = buff[(y+1)*Mp+x]; 
+             window[4] = buff[(y+1)*Mp+x]; 
              //window[8] = buff[(y+1)*Mp+x+1];
     
              }
              //  sort using the default operator<
              //printf("yes\n");
              std::sort(window.begin(), window.end()); 
-             buff[y*Mp+x] = window[1];
+             buff[y*Mp+x] = window[2];
              //printf("yes\n");
       }
       
